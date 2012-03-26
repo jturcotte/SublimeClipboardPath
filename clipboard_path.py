@@ -1,12 +1,6 @@
 import sublime, sublime_plugin
 import re, os, os.path
 
-def intOrNone(s):
-    try:
-        return int(s)
-    except ValueError:
-        return None
-
 def walkParentsForFile(checkedPath, destPath):
     while (True):
         joined = os.path.join(checkedPath, destPath)
@@ -54,14 +48,15 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
 
         if (colonLineMatch):
             path = colonLineMatch.groups()[0]
-            line = intOrNone(colonLineMatch.groups()[1])
+            line = colonLineMatch.groups()[1]
         elif (parenthesesLineMatch):
             path = parenthesesLineMatch.groups()[0]
-            line = intOrNone(parenthesesLineMatch.groups()[1])
+            line = parenthesesLineMatch.groups()[1]
         elif (junkMatch):
             path = junkMatch.groups()[0]
 
         if line:
-            self.window.open_file(self.resolvePath(path), line)
+            pathAndLine = self.resolvePath(path) + ':' + line
+            self.window.open_file(pathAndLine, sublime.ENCODED_POSITION)
         else:
             self.window.open_file(self.resolvePath(path))
