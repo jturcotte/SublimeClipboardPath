@@ -55,8 +55,8 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
         elif (junkMatch):
             path = junkMatch.groups()[0]
 
+        resolvedPath = self.resolvePath(path)
         if line:
-            pathAndLine = self.resolvePath(path) + ':' + line
-            self.window.open_file(pathAndLine, sublime.ENCODED_POSITION)
+            self.window.open_file(resolvedPath + ':' + line, sublime.ENCODED_POSITION)
         else:
-            self.window.open_file(self.resolvePath(path))
+            self.window.open_file(resolvedPath)
