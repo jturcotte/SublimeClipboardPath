@@ -37,7 +37,7 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
         parentDirsMatch = re.search("(\\.\\.[/\\\\])*(.*)", path)
         if (parentDirsMatch):
             path = parentDirsMatch.groups()[1]
-        gitPathPrefixMatch = re.search("[ab][/\\\\](.*)", path)
+        gitPathPrefixMatch = re.search("^[ab][/\\\\](.*)", path)
         if (gitPathPrefixMatch):
             path = gitPathPrefixMatch.groups()[0]
 
