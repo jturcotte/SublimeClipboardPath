@@ -1,0 +1,3 @@
+[
+    { "command": "copy_basename_and_line", "caption": "Copy \"filename:line\"" }
+]

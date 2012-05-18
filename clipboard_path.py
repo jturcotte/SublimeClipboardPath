@@ -60,3 +60,10 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
             self.window.open_file(resolvedPath + ':' + line, sublime.ENCODED_POSITION)
         else:
             self.window.open_file(resolvedPath)
+
+class CopyBasenameAndLineCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        if self.view.file_name():
+            basename = os.path.basename(self.view.file_name())
+            line = self.view.rowcol(self.view.sel()[0].a)[0] + 1
+            sublime.set_clipboard('%s:%s' % (basename, line))
