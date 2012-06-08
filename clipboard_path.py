@@ -30,7 +30,9 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
             p = walkParentsForFile(f, path)
             if p:
                 return p
-        return path
+
+        # Not found.
+        return None
 
     def run(self):
         path = sublime.get_clipboard().strip()
@@ -56,6 +58,10 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
             path = junkMatch.groups()[0]
 
         resolvedPath = self.resolvePath(path)
+        if not resolvedPath:
+            sublime.status_message("Couldn't find a file matching [%s]" % sublime.get_clipboard().strip())
+            return
+
         if line:
             self.window.open_file(resolvedPath + ':' + line, sublime.ENCODED_POSITION)
         else:
