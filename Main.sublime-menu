@@ -1,0 +1,9 @@
+[
+    {
+        "id": "file",
+        "children":
+        [
+            { "command": "open_clipboard_path", "caption": "Open path in clipboard" }
+        ]
+    }
+]
