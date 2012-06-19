@@ -6,8 +6,9 @@ def walkParentsForFile(checkedPath, destPath):
         joined = os.path.join(checkedPath, destPath)
         if (os.path.exists(joined)):
             return os.path.normpath(joined)
-        checkedPath = os.path.split(checkedPath)[0]
-        if (not checkedPath or checkedPath == '/'):
+        checkedPath, eaten = os.path.split(checkedPath)
+        isRoot = not eaten
+        if (isRoot):
             break
     return None
 
