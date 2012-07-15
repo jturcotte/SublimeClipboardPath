@@ -15,6 +15,8 @@ def walkParentsForFile(checkedPath, destPath):
 
 class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
     def resolvePath(self, path):
+        if (path.startswith('file://')):
+            path = path[len('file://'):]
         if (os.path.isabs(path)):
             return os.path.normpath(path)
 
