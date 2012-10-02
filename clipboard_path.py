@@ -47,9 +47,9 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
             path = gitPathPrefixMatch.groups()[0]
 
         line = None
-        colonLineMatch = re.search("(.*?):(\\d+).*", path)
-        parenthesesLineMatch = re.search("(.*?)\\((\\d+)\\).*", path)
-        junkMatch = re.search("(.*?)[:,].*", path)
+        colonLineMatch = re.search(r'(.*?):(\d+).*', path)
+        parenthesesLineMatch = re.search(r'(.*?)\((\d+)\).*', path)
+        junkMatch = re.search(r'(.*?[^\w]+.*?)[:,].*', path)
 
         if (colonLineMatch):
             path = colonLineMatch.groups()[0]
