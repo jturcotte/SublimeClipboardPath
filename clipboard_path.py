@@ -71,7 +71,7 @@ class OpenClipboardPathCommand(sublime_plugin.WindowCommand):
             self.window.open_file(resolvedPath)
 
     def is_enabled(self):
-        return sublime.get_clipboard().strip()
+        return bool(sublime.get_clipboard().strip())
 
 class CopyBasenameAndLineCommand(sublime_plugin.TextCommand):
     def run(self, edit):
